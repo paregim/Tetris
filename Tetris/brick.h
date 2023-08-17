@@ -3,6 +3,8 @@
 
 class Brick
 {
+	friend class wall;
+
 private:
 	const int minotype;
 	Point loc;
