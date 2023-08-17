@@ -1,8 +1,11 @@
-#include "brick.h"
+#include "inc.h"
 
-Brick::Brick(int type_in)
-	:minotype(type_in), loc(game_config.wall_corner.x + (game_config.x_wall_size) / 2, 0), rotate(0)
-{}
+Brick::Brick(int type_in) :minotype(type_in)
+{
+	loc.x = game_config.wall_corner.x + game_config.x_wall_size / 2;
+	loc.y = 0;
+	rotate = 0;
+}
 
 int Brick::GetMinoType() const
 {
@@ -47,12 +50,12 @@ void Brick::Move(MOVE_DIR dir, int offset)
 
 void Brick::Rotate(int rotate)
 {
-
+	
 }
 
 bool Brick::CanMove(MOVE_DIR dir, int offset)
 {
-
+	return true;
 }
 
 void Brick::MoveNDraw(MOVE_DIR dir, int offset)

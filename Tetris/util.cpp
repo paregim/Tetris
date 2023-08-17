@@ -16,9 +16,25 @@ void GotoCursor(Point loc)
 	SetConsoleCursorPosition(consoleHandle, pos);
 }
 
+void GotoCursor(int x, int y)
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD pos;
+	pos.X = x * 2;
+	pos.Y = y;
+	SetConsoleCursorPosition(consoleHandle, pos);
+}
+
 void PutDot(Point loc, int color = 0)
 {
 	Setcolor(16, color);
 	GotoCursor(loc);
+	cout << "  ";
+}
+
+void PutDot(int x, int y, int color = 0)
+{
+	Setcolor(16, color);
+	GotoCursor(x, y);
 	cout << "  ";
 }

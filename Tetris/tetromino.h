@@ -10,6 +10,8 @@ public:
 
 	Mino()
 	{
+		color = 0;
+		size = 0;
 		for (int i = 0; i < ROTATE_DIR::MAX_ROTATE; i++)
 			shape[i] = nullptr;
 	}

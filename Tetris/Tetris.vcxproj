@@ -136,6 +136,7 @@
     <ClInclude Include="brick.h" />
     <ClInclude Include="game_config.h" />
     <ClInclude Include="game_ctrl.h" />
+    <ClInclude Include="inc.h" />
     <ClInclude Include="menu_interface.h" />
     <ClInclude Include="popup.h" />
     <ClInclude Include="seungtetris.h" />
