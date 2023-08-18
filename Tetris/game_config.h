@@ -32,8 +32,8 @@ public:
 	{
 		x_wall_size = 10;
 		y_wall_size = 20;
-		wall_corner.x = 5;
-		wall_corner.y = 0;
+		wall_corner.x = 15;
+		wall_corner.y = 5;
 
 		wall_color = blue;
 		text_color = black;

@@ -16,6 +16,10 @@ Wall::Wall(int x_in, int y_in)
 	for (int i = 0; i < x_size; i++)
 		wall[i] = new char[y_size] {};
 
+	for (int i = 0; i < x_size; i++)
+		for (int j = 0; j < y_size; j++)
+			wall[i][j] = game_config.background_color;
+
 	for (int i = 0; i < y_size; i++)
 	{
 		wall[0][i] = game_config.wall_color;
@@ -23,7 +27,7 @@ Wall::Wall(int x_in, int y_in)
 	}
 	for (int i = 0; i < x_size; i++)
 	{
-		wall[i][0] = game_config.wall_color;
+		//wall[i][0] = game_config.wall_color;
 		wall[i][y_size - 1] = game_config.wall_color;
 	}
 }
@@ -39,15 +43,15 @@ Wall::~Wall()
 
 void Wall::Draw()
 {
-	int color;
+	//int color;
 
 	for (int i = 0; i < x_size; i++)
 	{
 		for (int j = 0; j < y_size; j++)
 		{
-			color = (wall[i][j] == 0) ? game_config.background_color : wall[i][j];
+			//color = (wall[i][j] == 0) ? game_config.background_color : wall[i][j];
 
-			PutDot(i + game_config.wall_corner.x, j + game_config.wall_corner.y, color);
+			PutDot(i + game_config.wall_corner.x, j + game_config.wall_corner.y, wall[i][j]);
 		}
 	}
 }

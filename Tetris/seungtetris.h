@@ -36,12 +36,12 @@ struct Point
 		y = y_in;
 	}
 
-	Point operator + (Point& p)
+	Point operator + (const Point& p)
 	{
 		return Point(this->x + p.x, this->y + p.y);
 	}
 
-	Point operator - (Point& p)
+	Point operator - (const Point& p)
 	{
 		return Point(this->x - p.x, this->y - p.y);
 	}
@@ -55,20 +55,20 @@ struct Point
 
 enum {
 	black = 0,
-	blue,
-	green,
-	cyan,
-	red,
-	purple,
-	brown,
-	lightgray,
-	darkgray,
-	lightblue,
-	lightgreen,
-	lightcyan,
-	lightred,
-	lightpurple,
-	yellow,
-	white
+	blue = 1,
+	green = 2,
+	cyan = 3,
+	red = 4,
+	purple = 5,
+	brown = 6,
+	lightgray = 7,
+	darkgray = 8,
+	lightblue = 9,
+	lightgreen = 10,
+	lightcyan = 11,
+	lightred = 12,
+	lightpurple = 13,
+	yellow = 14,
+	white = 15
 };
 

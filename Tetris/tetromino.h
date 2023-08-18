@@ -5,38 +5,30 @@
 class Mino
 {
 public:
-	int color;
-	int size;		//ºí·Ï Ä­ °³¼ö
-	Point** shape;
+	const int color;
+	const int size;		//ºí·Ï Ä­ °³¼ö
+	const Point* shape[ROTATE_DIR::MAX_ROTATE];
 
 	Mino()
+		:color(0), size(0)
 	{
-		color = 0;
-		size = 0;
-		shape = new Point * [1];
-		shape[0] = nullptr;
+		for (int i = 0; i < ROTATE_DIR::MAX_ROTATE; i++) shape[i] = nullptr;
 	}
 
-	Mino(int color_in, int size_in, Point* shape_in)
+	Mino(int color_in, int size_in, const Point* deg0, const Point* deg90, const Point* deg180, const Point* deg270)
 		:color(color_in), size(size_in)
 	{
-		shape = new Point* [ROTATE_DIR::MAX_ROTATE];
-
-		for (int i = 0; i < ROTATE_DIR::MAX_ROTATE; i++)
-		{
-			shape[i] = new Point[size];
-			for (int j = 0; j < size; j++)
-			{
-				shape[i][j] = shape_in[(4 * i) + j];
-			}
-		}
+		shape[ROTATE_DIR::DEG_0] = deg0;
+		shape[ROTATE_DIR::DEG_90] = deg90;
+		shape[ROTATE_DIR::DEG_180] = deg180;
+		shape[ROTATE_DIR::DEG_270] = deg270;
 	}
 
-	~Mino()
+	/*~Mino()
 	{
 		for (int i = 0; i < ROTATE_DIR::MAX_ROTATE; i++)
 			if (shape[i] != nullptr) delete[] shape[i];
-	}
+	}*/
 
 	//void Draw(Point loc, int rotate) { for (int i = 0; i < size; i++) PutDot(loc + shape[rotate][i], color); }
 };

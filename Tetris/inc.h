@@ -5,4 +5,6 @@
 #include "util.h"
 #include "wall.h"
 
+extern Mino* mino;
+extern Wall wall;
 extern GameConfig game_config;

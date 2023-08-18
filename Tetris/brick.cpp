@@ -1,13 +1,20 @@
 #include "inc.h"
 
-extern Mino* mino_shapes;
-extern Wall wall;
-
 Brick::Brick(int type_in) :minotype(type_in)
 {
 	loc.x = game_config.wall_corner.x + game_config.x_wall_size / 2;
-	loc.y = 0;
+	loc.y = game_config.wall_corner.y + 1;
 	rotate = 0;
+}
+
+const int Brick::BrickSize()
+{
+	return mino[minotype].size;
+}
+
+const Point* Brick::CurrentShape()
+{
+	return mino[minotype].shape[rotate];
 }
 
 int Brick::GetMinoType() const
@@ -28,17 +35,19 @@ int Brick::GetRotate() const
 
 void Brick::Draw()
 {
-	for (int i = 0; i < mino_shapes[minotype].size; i++) PutDot(loc + mino_shapes[minotype].shape[rotate][i], mino_shapes[minotype].color);
+	const Point* Shape = CurrentShape();
+	for (int i = 0; i < mino[minotype].size; i++) PutDot(loc + Shape[i], mino[minotype].color);
 }
 
 void Brick::Erase()
 {
-	for (int i = 0; i < mino_shapes[minotype].size; i++) PutDot(loc + mino_shapes[minotype].shape[rotate][i], game_config.background_color);
+	const Point* Shape = CurrentShape();
+	for (int i = 0; i < mino[minotype].size; i++) PutDot(loc + Shape[i], game_config.background_color);
 }
 
-void Brick::Move(MOVE_DIR dir, int offset)
+bool Brick::Move(MOVE_DIR dir, int offset)
 {
-	//if (CanMove(dir, offset))
+	if (CanMove(dir, offset))
 	{
 		if (dir == MOVE_DIR::DOWN)
 			loc.y += offset;
@@ -46,7 +55,9 @@ void Brick::Move(MOVE_DIR dir, int offset)
 			loc.x -= offset;
 		else if (dir == MOVE_DIR::RIGHT)
 			loc.x += offset;
+		return true;
 	}
+	else return false;
 }
 
 void Brick::Rotate(int offset)
@@ -56,18 +67,21 @@ void Brick::Rotate(int offset)
 
 bool Brick::CanMove(MOVE_DIR dir, int offset)
 {
-	Point temp(loc);
+	Point temp_cood(loc);
+	const Point* Shape = CurrentShape();
 
-	if (dir == MOVE_DIR::DOWN)
-		temp.y = loc.y + offset;
-	else if (dir == MOVE_DIR::LEFT)
-		temp.x = loc.x - offset;
-	else if (dir == MOVE_DIR::RIGHT)
-		temp.x = loc.x + offset;
+	if (dir == MOVE_DIR::DOWN) temp_cood.y = loc.y + offset;
+	else if (dir == MOVE_DIR::LEFT) temp_cood.x = loc.x - offset;
+	else if (dir == MOVE_DIR::RIGHT) temp_cood.x = loc.x + offset;
 
-	for (int i = 0; i < mino_shapes[minotype].size; i++)
-		if (wall.wall[temp.x - game_config.wall_corner.x + mino_shapes[minotype].shape[rotate][i].x][temp.y - game_config.wall_corner.y + mino_shapes[minotype].shape[rotate][i].y] != 0)
-			return false;
+	for (int i = 0; i < BrickSize(); i++)
+	{
+		// BrickDot_cood = temp_cood + Shape[i];
+		// WallOffsetFromCorner = BrickDot_cood - game_config.wall_corner;
+		Point WallOffsetFromCorner = (temp_cood + Shape[i]) - game_config.wall_corner;
+		if (wall.wall[WallOffsetFromCorner.x][WallOffsetFromCorner.y] != game_config.background_color) return false;
+	}
+
 	return true;
 }
 
