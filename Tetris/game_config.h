@@ -35,10 +35,10 @@ public:
 		wall_corner.x = 5;
 		wall_corner.y = 0;
 
-		wall_color = 3;//BLUE;
-		text_color = 0;// BLACK;
-		floor_color = 13;// GRAY;
-		background_color = 16;// WHITE;
+		wall_color = blue;
+		text_color = black;
+		floor_color = lightgray;
+		background_color = white;
 
 #if 0
 		left_key;

@@ -29,5 +29,46 @@ namespace TETROMINO {
 struct Point
 {
 	int x, y;
+
+	Point(int x_in = 0, int y_in = 0)
+	{
+		x = x_in;
+		y = y_in;
+	}
+
+	Point operator + (Point& p)
+	{
+		return Point(this->x + p.x, this->y + p.y);
+	}
+
+	Point operator - (Point& p)
+	{
+		return Point(this->x - p.x, this->y - p.y);
+	}
+
+	friend ostream& operator << (ostream& out, Point& p)
+	{
+		out << p.x << ", " << p.y;
+		return out;
+	}
+};
+
+enum {
+	black = 0,
+	blue,
+	green,
+	cyan,
+	red,
+	purple,
+	brown,
+	lightgray,
+	darkgray,
+	lightblue,
+	lightgreen,
+	lightcyan,
+	lightred,
+	lightpurple,
+	yellow,
+	white
 };
 

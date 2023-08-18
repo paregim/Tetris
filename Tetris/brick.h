@@ -3,7 +3,7 @@
 
 class Brick
 {
-	friend class wall;
+	friend class Wall;
 
 private:
 	const int minotype;
@@ -20,7 +20,7 @@ public:
 	void Draw();
 	void Erase();
 	void Move(MOVE_DIR dir, int offset);
-	void Rotate(int rotate);	//enum ROTATE_DIR
+	void Rotate(int offset);	//enum ROTATE_DIR
 	bool CanMove(MOVE_DIR dir, int offset);
 	void MoveNDraw(MOVE_DIR dir, int offset);
 	void RotateNDraw(int rotate);	//enum ROTATE_DIR

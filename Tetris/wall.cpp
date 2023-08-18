@@ -24,7 +24,7 @@ Wall::Wall(int x_in, int y_in)
 	for (int i = 0; i < x_size; i++)
 	{
 		wall[i][0] = game_config.wall_color;
-		wall[i][y_in - 1] = game_config.wall_color;
+		wall[i][y_size - 1] = game_config.wall_color;
 	}
 }
 
@@ -54,12 +54,12 @@ void Wall::Draw()
 
 void Wall::BrickToWall(class Brick& brick)
 {
-	
+	wall[brick.loc.x][brick.loc.y];
 }
 
 void Wall::FloorUp(int offset)
 {
-
+	
 }
 
 void Wall::ClearLine(int level)

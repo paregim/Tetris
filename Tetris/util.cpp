@@ -28,8 +28,11 @@ void GotoCursor(int x, int y)
 void PutDot(Point loc, int color = 0)
 {
 	Setcolor(16, color);
-	GotoCursor(loc);
-	cout << "  ";
+	if (loc.x >= 0 && loc.y >= 0)
+	{
+		GotoCursor(loc);
+		cout << "  ";
+	}
 }
 
 void PutDot(int x, int y, int color = 0)
