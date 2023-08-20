@@ -17,5 +17,5 @@ public:
 	void Draw();
 	void BrickToWall(class Brick& brick);
 	void FloorUp(int offset);
-	void ClearLine(int level);
+	void ClearLine();
 };

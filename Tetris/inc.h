@@ -8,3 +8,5 @@
 extern Mino* mino;
 extern Wall wall;
 extern GameConfig game_config;
+extern bool Playing;
+extern bool TouchGround;

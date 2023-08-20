@@ -43,14 +43,10 @@ Wall::~Wall()
 
 void Wall::Draw()
 {
-	//int color;
-
 	for (int i = 0; i < x_size; i++)
 	{
 		for (int j = 0; j < y_size; j++)
 		{
-			//color = (wall[i][j] == 0) ? game_config.background_color : wall[i][j];
-
 			PutDot(i + game_config.wall_corner.x, j + game_config.wall_corner.y, wall[i][j]);
 		}
 	}
@@ -58,15 +54,34 @@ void Wall::Draw()
 
 void Wall::BrickToWall(class Brick& brick)
 {
-	wall[brick.loc.x][brick.loc.y];
+	for (int i = 0; i < brick.BrickSize(); i++)
+	{
+		Point BrickOffsetFromCorner = (brick.loc + brick.CurrentShape()[i]) - game_config.wall_corner;
+		wall[BrickOffsetFromCorner.x][BrickOffsetFromCorner.y] = mino[brick.minotype].color;
+	}
+	ClearLine();
 }
 
 void Wall::FloorUp(int offset)
 {
-	
+	for (int i = 1; i < x_size - 1; i++)
+	{
+		for (int j = 0; j < y_size - offset - 1; j++) wall[i][j] = wall[i][j + offset];
+		for (int j = y_size - offset - 1; j < y_size - 1; j++) wall[i][j] = game_config.floor_color;
+	}
 }
 
-void Wall::ClearLine(int level)
+void Wall::ClearLine()
 {
-
+	for (int i = 0; i < y_size - 1; i++)
+	{
+		bool LineIsFull = true;
+		for (int j = 1; j < x_size - 1; j++)
+			if (wall[j][i] != game_config.background_color)
+				LineIsFull = false;
+		if (LineIsFull == true)
+			for (int j = i; j > 0; j--)
+				for (int k = 1; k < x_size - 1; k++)
+					wall[k][j] = wall[k][j - 1];
+	}
 }

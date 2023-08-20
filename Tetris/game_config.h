@@ -40,16 +40,16 @@ public:
 		floor_color = lightgray;
 		background_color = white;
 
-#if 0
-		left_key;
-		right_key;
-		s_drop_key;
+		left_key = 'a';
+		right_key = 'd';
+		s_drop_key = 's';
 		h_drop_key;
 		rotate90_key;
 		ratate180_key;
 		hold_key;
 		pause_key;
 
+#if 0
 		preview_num;
 		hold_num;
 		floor_up_cycle;

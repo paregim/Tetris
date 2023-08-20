@@ -26,31 +26,42 @@ Mino* mino = new Mino[TETROMINO::MAX_TYPE] {
 
 Wall wall(game_config.x_wall_size, game_config.y_wall_size);
 
+bool Playing = 0;
+bool TouchGround = 0;
+
 int main()
 {
 	wall.Draw();
 
-	Brick brick(TETROMINO::I);
-	brick.Draw();
-	_getch();
+	Brick* brick = new Brick(TETROMINO::I);
 
-	while (1)
+	Playing = 1;
+
+	while (Playing)
 	{
 		switch (_getch())
 		{
 		case 'a':
-			brick.MoveNDraw(MOVE_DIR::LEFT, 1);
+			brick->MoveNDraw(MOVE_DIR::LEFT, 1);
 			break;
 
 		case 's':
-			brick.MoveNDraw(MOVE_DIR::DOWN, 1);
+			brick->MoveNDraw(MOVE_DIR::DOWN, 1);
 			break;
 
 		case 'd':
-			brick.MoveNDraw(MOVE_DIR::RIGHT, 1);
+			brick->MoveNDraw(MOVE_DIR::RIGHT, 1);
 			break;
 
 
+		}
+		if (TouchGround)
+		{
+			wall.BrickToWall(*brick);
+			Brick* temp = brick;
+			brick = new Brick(TETROMINO::I);
+			delete temp;
+			TouchGround = 0;
 		}
 	}
 

@@ -3,8 +3,10 @@
 Brick::Brick(int type_in) :minotype(type_in)
 {
 	loc.x = game_config.wall_corner.x + game_config.x_wall_size / 2;
-	loc.y = game_config.wall_corner.y + 1;
+	loc.y = game_config.wall_corner.y;
 	rotate = 0;
+
+	Draw();
 }
 
 const int Brick::BrickSize()
@@ -57,7 +59,7 @@ bool Brick::Move(MOVE_DIR dir, int offset)
 			loc.x += offset;
 		return true;
 	}
-	else return false;
+	return false;
 }
 
 void Brick::Rotate(int offset)
@@ -88,8 +90,9 @@ bool Brick::CanMove(MOVE_DIR dir, int offset)
 void Brick::MoveNDraw(MOVE_DIR dir, int offset)
 {
 	Erase();
-	Move(dir, offset);
+	bool moved = Move(dir, offset);
 	Draw();
+	if (moved == false && dir == MOVE_DIR::DOWN) TouchGround = 1;
 }
 
 void Brick::RotateNDraw(int rotate)
