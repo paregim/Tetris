@@ -24,6 +24,7 @@ public:
 	bool Move(MOVE_DIR dir, int offset);
 	void Rotate(int offset);	//enum ROTATE_DIR
 	bool CanMove(MOVE_DIR dir, int offset);
+	bool CanRotate(int offset);
 	void MoveNDraw(MOVE_DIR dir, int offset);
 	void RotateNDraw(int rotate);	//enum ROTATE_DIR
 };

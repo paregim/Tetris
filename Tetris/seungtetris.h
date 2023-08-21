@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <windows.h>
+#include <random>
+#include <chrono>
 using namespace std;
 
 namespace ROTATE_DIR {

@@ -1,4 +1,18 @@
 #include "util.h"
+#include "inc.h"
+
+void init()
+{
+	char cmd[128];
+	sprintf_s(cmd, "mode con cols=%d lines=%d | title 테 트 리 스", (game_config.x_wall_size + (game_config.wall_corner.x * 2)) * 2, game_config.y_wall_size + (game_config.wall_corner.y * 2) + 1);
+	system(cmd);
+
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO ConsoleCursor;
+	ConsoleCursor.bVisible = 0;
+	ConsoleCursor.dwSize = 1;
+	SetConsoleCursorInfo(consoleHandle, &ConsoleCursor);
+}
 
 void Setcolor(int f_color, int b_color)
 {

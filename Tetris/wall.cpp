@@ -69,6 +69,7 @@ void Wall::FloorUp(int offset)
 		for (int j = 0; j < y_size - offset - 1; j++) wall[i][j] = wall[i][j + offset];
 		for (int j = y_size - offset - 1; j < y_size - 1; j++) wall[i][j] = game_config.floor_color;
 	}
+	Draw();
 }
 
 void Wall::ClearLine()
@@ -77,11 +78,15 @@ void Wall::ClearLine()
 	{
 		bool LineIsFull = true;
 		for (int j = 1; j < x_size - 1; j++)
-			if (wall[j][i] != game_config.background_color)
+			if (wall[j][i] == game_config.background_color || wall[j][i] == game_config.floor_color)
 				LineIsFull = false;
 		if (LineIsFull == true)
+		{
 			for (int j = i; j > 0; j--)
 				for (int k = 1; k < x_size - 1; k++)
 					wall[k][j] = wall[k][j - 1];
+			linescore++;
+		}
 	}
+	Draw();
 }

@@ -49,12 +49,10 @@ public:
 		hold_key;
 		pause_key;
 
-#if 0
-		preview_num;
+		preview_num = 5;
 		hold_num;
-		floor_up_cycle;
-		floor_up_offset;
-		clear_goal;
-#endif
+		floor_up_cycle = 10;
+		floor_up_offset = 1;
+		clear_goal = 5;
 	}
 };
