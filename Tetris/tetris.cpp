@@ -91,16 +91,13 @@ int main()
 		minolist[i] = random(mersenne);
 
 	MenuInterface ui(minolist);
-
 	ui.DrawMenuFrame();
-
 	wall.Draw();
 
 	Brick* brick = new Brick(ui.GetNextMino(random(mersenne)));
+	int floorupcount = 0;
 
 	auto start = chrono::steady_clock::now();
-
-	int floorupcount = 0;
 
 	while (Playing)
 	{
@@ -128,6 +125,37 @@ int main()
 			case 32:		//spacebar
 				brick->MoveNDraw(MOVE_DIR::DOWN, game_config.y_wall_size);
 				break;
+
+			case 'c':
+				brick->RotateNDraw(2);
+				break;
+
+			case 'x':
+			{
+				Brick* temp = brick;
+				int holdtype = ui.Hold(brick->GetMinoType());
+				Point loc;
+				if (holdtype != TETROMINO::MAX_TYPE) brick = new Brick(holdtype, temp->GetLocation(loc), temp->GetRotate());
+				else brick = new Brick(ui.GetNextMino(random(mersenne)), temp->GetLocation(loc), temp->GetRotate());
+
+				/*if (Playing = false)
+				{
+					ui.EraseHold();
+					Brick* temp2 = brick;
+					brick = temp;
+					delete temp2;
+					Playing = true;
+				}
+				else
+				{
+					delete temp;
+				}*/
+				delete temp;
+
+				wall.Draw();
+				brick->Draw();
+				break;
+			}
 
 			case 224:		//arrow keys
 				switch (_getch())

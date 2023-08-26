@@ -12,6 +12,7 @@ private:
 
 public:
 	Brick(int type_in);
+	Brick(int type_in, Point location_in, int rotate_in);
 
 	int GetMinoType() const;
 	Point& GetLocation(Point& loc) const;

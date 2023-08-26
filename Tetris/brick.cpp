@@ -10,6 +10,16 @@ Brick::Brick(int type_in) :minotype(type_in)
 	else Playing = 0;
 }
 
+Brick::Brick(int type_in, Point location_in, int rotate_in) :minotype(type_in)
+{
+	loc.x = location_in.x;
+	loc.y = location_in.y;
+	rotate = rotate_in;
+
+	if (CanMove(MOVE_DIR::DOWN, 1))	Draw();
+	else Playing = 0;
+}
+
 const int Brick::BrickSize()
 {
 	return mino[minotype].size;

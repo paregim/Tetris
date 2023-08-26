@@ -4,6 +4,7 @@
 MenuInterface::MenuInterface(int* minolist)
 {
 	nextmino = minolist;
+	holdmino = TETROMINO::MAX_TYPE;
 	DrawMenuFrame();
 	DrawHoldFrame();
 	DrawNext();
@@ -27,7 +28,9 @@ void MenuInterface::DrawMenuFrame()
 
 void MenuInterface::DrawHoldFrame()
 {
-
+	GotoCursor(game_config.wall_corner.x + game_config.x_wall_size + 5, game_config.wall_corner.y);
+	Setcolor(blue, black);
+	cout << "HOLD";
 }
 
 void MenuInterface::DrawSpeed()
@@ -35,15 +38,38 @@ void MenuInterface::DrawSpeed()
 
 }
 
-void MenuInterface::DrawHold(int mino)
+void MenuInterface::EraseHold()
 {
-
+	for (int i = 0; i < mino[holdmino].size; i++) PutDot(game_config.wall_corner.x + game_config.x_wall_size + mino[holdmino].shape[ROTATE_DIR::DEG_0][i].x + 6, game_config.wall_corner.y + mino[holdmino].shape[ROTATE_DIR::DEG_0][i].y + 2, black);
 }
 
-void MenuInterface::EraseNext(/*int* mino*/)
+void MenuInterface::DrawHold()
 {
-	
+	for (int i = 0; i < mino[holdmino].size; i++) PutDot(game_config.wall_corner.x + game_config.x_wall_size + mino[holdmino].shape[ROTATE_DIR::DEG_0][i].x + 6, game_config.wall_corner.y + mino[holdmino].shape[ROTATE_DIR::DEG_0][i].y + 2, mino[holdmino].color);
 }
+
+int MenuInterface::Hold(int mino)
+{
+	int temp = holdmino;
+	if (holdmino != TETROMINO::MAX_TYPE) EraseHold();
+	holdmino = mino;
+	DrawHold();
+	return temp;
+}
+
+int MenuInterface::Hold(Brick brick)
+{
+	int temp = holdmino;
+	if (holdmino != TETROMINO::MAX_TYPE) EraseHold();
+	holdmino = mino;
+	DrawHold();
+	return temp;
+}
+
+//void MenuInterface::EraseNext(/*int* mino*/)
+//{
+//	
+//}
 
 void MenuInterface::DrawNext(/*int* mino*/)
 {
